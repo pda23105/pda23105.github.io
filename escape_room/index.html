@@ -105,7 +105,7 @@
     <script>
         var scene1 = document.getElementById('s1');
         for (var i = 0; i < 10; i++) {
-            var t = document.getElementById('table').clodeNode(true);
+            var t = document.getElementById('table').cloneNode(true);
             var x = Math.random() * 40 - 20;
             var z = Math.random() * 40 - 20;
             t.setAttribute('position', x + ' 2 ' + z);
@@ -113,7 +113,7 @@
             scene1.appendChild(t);
         }
         for (var i = 0; i < 20; i++) {
-            var c = document.getElementById('chair').clodeNode(true);
+            var c = document.getElementById('chair').cloneNode(true);
             var x = Math.random() * 40 - 20;
             var z = Math.random() * 40 - 20;
             c.setAttribute('position', x + ' 6 ' + z);
