@@ -6,7 +6,7 @@
         var locked = true, tool = false, gas = true, message = "", time = 5000;
 
         AFRAME.registerComponent('updating', {
-            tick: function() {
+            tick: function () {
                 if (gas) time--;
                 if (time < 0) message = "Game Over...";
                 if (message != "") this.el.setAttribute('value', message);
@@ -21,6 +21,37 @@
             }
         });
     </script>
+    <script>
+        AFRAME.registerComponent('focusing', {
+            init: function () {
+                var el = this.el;
+                el.addEventListener('mouseenter', function () {
+                    var pos = document.getElementById('cam').getAttribute('position');
+
+                    if (el.id == "door") {
+                        if (!locked && time >= 0) { el.components.sound.playSound(); message = "Well Done!"; }
+                        return;
+                    }
+                    else if (el.id == "window") {
+                        if (tool) {
+                            document.querySelector('a-scene').removeAttribute('animation');
+                            document.querySelector('a-scene').setAttribute('animation', 'property: fog.far; to: 1000; dur: 50000');
+                            gas = false;
+                            el.components.sound.playSound(); el.setAttribute('blending', 'subtractive');
+                        }
+                        return;
+                    }
+                    el.removeAttribute('dynamic-body');
+                    el.setAttribute('animation', 'property: position; to: ' + pos.x + ' 0 ' + pos.z);
+
+                    if (el.id == "torch") document.getElementById('light').setAttribute('animation', 'property: visible; to: true');
+                    else if (el.id == "key") locked = false;
+                    else if (el.id == "hammer") tool = true;
+                    setTimeout(function () { el.remove(); }, 3000);
+                });
+            }
+        });
+    </script>                 
 </head>
 <body>
     <a-scene id="s1" fog="color: silver; near: 0" animation="property: fog.far; to: 5; dur: 50000; easing: easeOutQuad">
