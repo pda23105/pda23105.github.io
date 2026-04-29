@@ -1,1 +1,23 @@
+<html>
+    <head>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script>
+        // NAVIGATION: define the place of each scene on the graph
+        const MAP = [
+            [0, 5, 6],
+            [2, 1, 0],
+            [0, 3, 4]
+        ];
 
+        // INVENTORY: add any items available when the game starts
+        let ITEMS = ['cups'];
+
+        // MAIN INFO: enter the scenes welcome text (ascending order)
+        const TEXT = [
+            'You are walking on a narrow path.\nThere is an old store house beside.',
+            'A man is sitting behind a table:\n"Hi, do you have something for me?"',
+            'You are in the middle of a field.\nA policeman is standing by his car.',
+            'There is a small harbor here.\nThe sailor is ready to depart...',
+            'You are at the center of a village.\nA begar is asking for help!',
+            'You are standing inside a church.\nThe priest is silently praying...'
+        ];
